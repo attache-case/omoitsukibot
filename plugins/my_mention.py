@@ -25,7 +25,7 @@ from slackbot.bot import default_reply  # 該当する応答がない場合に�
 def mention_func(message):
     message.reply('私にメンションと言ってどうするのだ') # メンション
 
-@listen_to(r'【おもいつき】')
+@listen_to('おもいつき')
 def listen_func(message):
 	text = message.body["text"]
 	print(text)
