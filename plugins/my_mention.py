@@ -1,6 +1,6 @@
 # coding: utf-8
 
-# import Github_func
+import Github_func
 
 from slackbot.bot import respond_to     # @botname: で反応するデコーダ
 from slackbot.bot import listen_to      # チャネル内発言で反応するデコーダ
@@ -23,14 +23,14 @@ from slackbot.bot import default_reply  # 該当する応答がない場合に�
 #                               文字列中に':'はいらない
 @respond_to('メンション')
 def mention_func(message):
-    message.reply('私にメンションと言ってどうするのだ') # メンション
+	message.reply('私にメンションと言ってどうするのだ') # メンション
 
 @listen_to(r'^おもいつき\s+\S.*')
 def listen_func(message):
 	text = message.body["text"]
 	print(text)
-    message.send('誰かがおもいつきを投稿したようだ')      # ただの投稿
-    message.reply('君だね？')                           # メンション
+	message.send('誰かがおもいつきを投稿したようだ')      # ただの投稿
+	message.reply('君だね？')                           # メンション
 	message.send('内容は：' + text)
 	# Github_func.make_github_issue('Issue Title', 'Body text', 'assigned_user', None, [])
 	message.react('octocat')
