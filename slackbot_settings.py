@@ -1,0 +1,2 @@
+API_TOKEN = "xoxb-206501043328-9kPNOPMb09dz1WuXxFyyktE8"
+DEFAULT_REPLY = "Hey, I'm on Heroku!"
