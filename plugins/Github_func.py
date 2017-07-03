@@ -12,12 +12,13 @@ PASSWORD = 'CHANGEME'
 REPO_OWNER = 'IIS-Lab'
 REPO_NAME = 'LightBulb'
 
-def make_github_issue(title, body=None, assignee=None, milestone=None, labels=None):
+def make_github_issue(title, body=None, assignee=None, milestone=None, labels=[]):
     '''Create an issue on github.com using the given parameters.'''
     # Our url to create issues via POST
     url = 'https://api.github.com/repos/%s/%s/issues' % (REPO_OWNER, REPO_NAME)
     # Create an authenticated session to create the issue
-    session = requests.session(auth=(USERNAME, PASSWORD))
+    session = requests.Session()
+	session.auth = (USERNAME, PASSWORD)
     # Create our issue
     issue = {'title': title,
              'body': body,

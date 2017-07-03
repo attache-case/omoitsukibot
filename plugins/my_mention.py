@@ -32,5 +32,5 @@ def listen_func(message):
     message.send('誰かがおもいつきを投稿したようだ')      # ただの投稿
     message.reply('君だね？')                           # メンション
 	message.send('内容は：' + text)
-	# Github_func.make_github_issue('Issue Title', 'Body text', 'assigned_user', 3, ['bug'])
+	# Github_func.make_github_issue('Issue Title', 'Body text', 'assigned_user', None, [])
 	message.react('octocat')
