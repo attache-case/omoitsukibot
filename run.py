@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from slackbot.bot import Bot
 
 def main():
@@ -5,4 +7,5 @@ def main():
 	bot.run()
 
 if __name__ == "__main__":
+	print('start omoitsukibot')
 	main()
