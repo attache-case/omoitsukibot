@@ -25,11 +25,12 @@ from slackbot.bot import default_reply  # 該当する応答がない場合に�
 def mention_func(message):
     message.reply('私にメンションと言ってどうするのだ') # メンション
 
-@listen_to('おもいつき')
+@listen_to(r'^おもいつき\s+\S.*')
 def listen_func(message):
 	text = message.body["text"]
 	print(text)
     message.send('誰かがおもいつきを投稿したようだ')      # ただの投稿
     message.reply('君だね？')                           # メンション
+	message.send('内容は：' + text)
 	# Github_func.make_github_issue('Issue Title', 'Body text', 'assigned_user', 3, ['bug'])
 	message.react('octocat')
