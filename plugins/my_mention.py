@@ -43,6 +43,6 @@ def listen_func(message):
 	# message.reply('君だね？')              # メンション
 	# message.send('内容は：' + text)
 	print("title: {0}".format(string_list[1]))
-	print("content: {1}".format(string_list[2]))
+	print("content: {0}".format(string_list[2]))
 	Github_func.make_github_issue(string_list[1], string_list[2], os.environ.get('GITHUB_USERNAME'), None, [])
 	message.react('octocat')
