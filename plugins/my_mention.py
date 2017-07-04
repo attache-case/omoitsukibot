@@ -25,25 +25,30 @@ from slackbot.bot import default_reply  # 該当する応答がない場合に�
 @respond_to('メンション')
 def mention_func(message):
 	message.reply('私にメンションと言ってどうするのだ') # メンション
-	# もしかして、botがスレッドに参加すれば上手くいくかもしれない
+	# もしかして、botがスレッドに参加すれば上手くIssueにコメントできるかもしれない
 
 @listen_to(r'^【おもいつき】\s+\S.*')
+@listen_to(r'^【おもいつき】+\S.*')
 @listen_to(r'^おもいつき\s+\S.*')
+@listen_to(r'^【思いつき】\s+\S.*')
+@listen_to(r'^【思いつき】+\S.*')
+@listen_to(r'^思いつき\s+\S.*')
+@listen_to(r'^【思い付き】\s+\S.*')
+@listen_to(r'^【思い付き】+\S.*')
+@listen_to(r'^思い付き\s+\S.*')
 def listen_func(message):
 	text = message.body["text"]
+	text = text.replace('【おもいつき】', '【おもいつき】 ')
 	string_list = text.split(None, 2)
 	string_list_len = len(string_list)
 	if string_list_len == 0:
-		message.send("Couldn't parse correctly(len(string_list)=0).\nSomething is wrong with my program.")
+		message.reply("Couldn't parse correctly(len(string_list)=0).\nSomething is wrong with my program.")
 	elif string_list_len == 1:
-		message.send("Please write the content of your OMOITSUKI.")
-	elif string_list_len == 2:
-		string_list.append(string_list[1]) # Issueの本文と内容を同一にする。
-	# print(text)
-	# message.send('誰かがおもいつきを投稿したようだ') # ただの投稿
-	# message.reply('君だね？')              # メンション
-	# message.send('内容は：' + text)
-	print("title: {0}".format(string_list[1]))
-	print("content: {0}".format(string_list[2]))
-	GHF.make_github_issue(string_list[1], string_list[2], os.environ.get('GITHUB_USERNAME'), None, [])
-	message.react('octocat')
+		message.reply("Please write the content of your OMOITSUKI.")
+	else:
+		if string_list_len == 2:
+			string_list.append(string_list[1]) # タイトルしか無かったらIssueの本文をタイトルと同一にする。
+		print("title: {0}".format(string_list[1]))
+		print("content: {0}".format(string_list[2]))
+		GHF.make_github_issue(string_list[1], string_list[2], os.environ.get('GITHUB_USERNAME'), None, [])
+		message.react('octocat') # notice that the OMOITSUKI has been successfully posted to Github.
