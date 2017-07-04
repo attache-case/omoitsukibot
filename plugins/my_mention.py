@@ -38,6 +38,8 @@ def listen_func(message):
 	text = text.replace('【おもいつき】', '【おもいつき】 ')
 	text = text.replace('【思いつき】', '【思いつき】 ')
 	text = text.replace('【思い付き】', '【思い付き】 ')
+	text = text.replace('。', '。 ')
+	text = text.replace('．', '． ')
 	string_list = text.split(None, 2)
 	string_list_len = len(string_list)
 	if string_list_len == 0:
