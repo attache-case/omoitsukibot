@@ -5,8 +5,8 @@ import requests
 
 # Authentication for user filing issue (must have read/write access to
 # repository to add issue to)
-USERNAME = 'CHANGEME'
-PASSWORD = 'CHANGEME'
+USERNAME = GITHUB_USERNAME
+PASSWORD = GITHUB_PASSWORD
 
 # The repository to add this issue to
 REPO_OWNER = 'IIS-Lab'
