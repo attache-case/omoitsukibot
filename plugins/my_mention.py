@@ -27,24 +27,23 @@ def mention_func(message):
 	message.reply('私にメンションと言ってどうするのだ') # メンション
 	# もしかして、botがスレッドに参加すれば上手くIssueにコメントできるかもしれない
 
-@listen_to(r'^【おもいつき】\s+\S.*')
-@listen_to(r'^【おもいつき】+\S.*')
-@listen_to(r'^おもいつき\s+\S.*')
-@listen_to(r'^【思いつき】\s+\S.*')
-@listen_to(r'^【思いつき】+\S.*')
-@listen_to(r'^思いつき\s+\S.*')
-@listen_to(r'^【思い付き】\s+\S.*')
-@listen_to(r'^【思い付き】+\S.*')
-@listen_to(r'^思い付き\s+\S.*')
+@listen_to(r'^【おもいつき】.*')
+@listen_to(r'^おもいつき.*')
+@listen_to(r'^【思いつき】.*')
+@listen_to(r'^思いつき.*')
+@listen_to(r'^【思い付き】.*')
+@listen_to(r'^思い付き.*')
 def listen_func(message):
 	text = message.body["text"]
 	text = text.replace('【おもいつき】', '【おもいつき】 ')
+	text = text.replace('【思いつき】', '【思いつき】 ')
+	text = text.replace('【思い付き】', '【思い付き】 ')
 	string_list = text.split(None, 2)
 	string_list_len = len(string_list)
 	if string_list_len == 0:
 		message.reply("Couldn't parse correctly(len(string_list)=0).\nSomething is wrong with my program.")
 	elif string_list_len == 1:
-		message.reply("Please write the content of your OMOITSUKI.")
+		message.reply("Please write the title and content of your OMOITSUKI.")
 	else:
 		if string_list_len == 2:
 			string_list.append(string_list[1]) # タイトルしか無かったらIssueの本文をタイトルと同一にする。
