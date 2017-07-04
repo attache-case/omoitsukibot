@@ -1,12 +1,13 @@
 # coding: utf-8
 
+import os
 import json
 import requests
 
 # Authentication for user filing issue (must have read/write access to
 # repository to add issue to)
-USERNAME = GITHUB_USERNAME
-PASSWORD = GITHUB_PASSWORD
+USERNAME = os.environ.get('GITHUB_USERNAME')
+PASSWORD = os.environ.get('GITHUB_PASSWORD')
 
 # The repository to add this issue to
 REPO_OWNER = 'IIS-Lab'
