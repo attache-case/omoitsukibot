@@ -31,12 +31,12 @@ def mention_func(message):
 def listen_func(message):
 	text = message.body["text"]
 	string_list = text.split(None, 2)
-	len = len(string_list)
-	if len == 0:
+	string_list_len = len(string_list)
+	if string_list_len == 0:
 		message.send("Couldn't parse correctly(len(string_list)=0).\nSomething is wrong with my program.")
-	elif len == 1:
+	elif string_list_len == 1:
 		message.send("Please write the content of your OMOITSUKI.")
-	elif len == 2:
+	elif string_list_len == 2:
 		string_list.append(string_list[1]) # Issueの本文と内容を同一にする。
 	# print(text)
 	# message.send('誰かがおもいつきを投稿したようだ') # ただの投稿
