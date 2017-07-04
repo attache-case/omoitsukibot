@@ -49,6 +49,9 @@ def listen_func(message):
 	else:
 		if string_list_len == 2:
 			string_list.append(string_list[1]) # タイトルしか無かったらIssueの本文をタイトルと同一にする。
+		else: # string_list_len == 3
+			string_list[1] = string_list[1].replace('。', '')
+			string_list[1] = string_list[1].replace('．', '')
 		print("title: {0}".format(string_list[1]))
 		print("content: {0}".format(string_list[2]))
 		GHF.make_github_issue(string_list[1], string_list[2], os.environ.get('GITHUB_USERNAME'), None, [])
