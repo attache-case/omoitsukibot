@@ -22,37 +22,47 @@ from slackbot.bot import default_reply  # 該当する応答がない場合に�
 # message.send('string')    string を送信
 # message.react('icon_emoji')  発言者のメッセージにリアクション(スタンプ)する
 #                               文字列中に':'はいらない
-@respond_to('メンション')
-def mention_func(message):
-	message.reply('私にメンションと言ってどうするのだ') # メンション
+
+# 「おもいつき」の書き方を質問されたと思ったら、「おもいつき」の書き方を答える
+@respond_to('フォーマット')
+@respond_to('おもいつき')
+@respond_to('思いつき')
+@respond_to('思い付き')
+@respond_to('書き方')
+def mention_omoitsuki_format(message):
+	message.reply('\nおもいつき投稿のフォーマットは\n> おもいつき タイトル\n> 本文\nだよ。')
 	# もしかして、botがスレッドに参加すれば上手くIssueにコメントできるかもしれない
 
+@respond_to('詳しく')
+@respond_to('くわしく')
+def mention_omoitsuki_format_detail(message):
+	message.reply('\nフォーマットの細かい仕様について。\n文頭にある、「おもいつき/思いつき/思い付き」に反応するよ。その後に何でもいいから区切り文字を挟んでタイトルを書いてほしいな。\nタイトルの後に本文を続ける前に必ず改行(Shift+Enter)をしてね。\nちなみに、文頭が「【おもいつき/思いつき/思い付き】」の時は、タイトルの前に区切り文字は要らないよ。')
+
 @listen_to(r'^【おもいつき】.*')
-@listen_to(r'^おもいつき.*')
+@listen_to(r'^おもいつき\s+\S.*')
 @listen_to(r'^【思いつき】.*')
-@listen_to(r'^思いつき.*')
+@listen_to(r'^思いつき\s+\S.*')
 @listen_to(r'^【思い付き】.*')
-@listen_to(r'^思い付き.*')
+@listen_to(r'^思い付き\s+\S.*')
 def listen_func(message):
+	print("MESSAGE->")
+	print(message)
+	print("<-MESSAGE")
 	text = message.body["text"]
 	text = text.replace('【おもいつき】', '【おもいつき】 ')
 	text = text.replace('【思いつき】', '【思いつき】 ')
 	text = text.replace('【思い付き】', '【思い付き】 ')
-	text = text.replace('。', '。 ')
-	text = text.replace('．', '． ')
-	string_list = text.split(None, 2)
+	string_list = text.split(None, 1)
 	string_list_len = len(string_list)
 	if string_list_len == 0:
-		message.reply("Couldn't parse correctly(len(string_list)=0).\nSomething is wrong with my program.")
+		message.reply("おもいつきに反応したつもりが、my_mention.pyにてstring_list_len==0となっている。何かがおかしい。")
 	elif string_list_len == 1:
-		message.reply("Please write the title and content of your OMOITSUKI.")
-	else:
-		if string_list_len == 2:
-			string_list.append(string_list[1]) # タイトルしか無かったらIssueの本文をタイトルと同一にする。
-		else: # string_list_len == 3
-			string_list[1] = string_list[1].replace('。', '')
-			string_list[1] = string_list[1].replace('．', '')
-		print("title: {0}".format(string_list[1]))
-		print("content: {0}".format(string_list[2]))
-		GHF.make_github_issue(string_list[1], string_list[2], os.environ.get('GITHUB_USERNAME'), None, [])
+		message.reply("おもいつきの投稿かな？\n文頭に単語「おもいつき」「思いつき」「思い付き」が含まれていたけれど、タイトルと本文が見当たらなかったよ。\nおもいつき投稿のフォーマットは\n> おもいつき タイトル\n> 本文\nだよ。")
+	else: # string_list_len == 2 -> at least there is a title of the OMOITSUKI
+		title_body = string_list[1].split('\n', 1)
+		if len(title_body) == 1:
+			title_body.append(title_body[0]) # タイトルしか無かったらIssueの本文をタイトルと同一にする。
+		print("title: {0}".format(title_body[0]))
+		print("content: {0}".format(title_body[1]))
+		# GHF.make_github_issue(title_body[0], title_body[1], os.environ.get('GITHUB_USERNAME'), None, [])
 		message.react('octocat') # notice that the OMOITSUKI has been successfully posted to Github.
