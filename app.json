@@ -1,0 +1,29 @@
+{
+  "name": "omoitsukibot",
+  "scripts": {
+  },
+  "env": {
+    "GITHUB_PASSWORD": {
+      "required": true
+    },
+    "GITHUB_TOKEN": {
+      "required": true
+    },
+    "GITHUB_USERNAME": {
+      "required": true
+    },
+    "SLACK_API_TOKEN": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
