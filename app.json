@@ -12,6 +12,12 @@
     "GITHUB_USERNAME": {
       "required": true
     },
+    "GITHUB_REPO_OWNER": {
+      "required": true
+    },
+    "GITHUB_REPO_NAME": {
+      "required": true
+    },
     "SLACK_API_TOKEN": {
       "required": true
     }
