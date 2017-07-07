@@ -23,6 +23,9 @@ It also tracks slack thread comments to *omoitsuki* post, and add comments to th
 
 ## <a name="Usage"> Usage
 
+First, [Deploy](#deploy) your *omoitsukibot* app.  
+
+Now, you can stock your *omoitsuki* by posting messages to the Slack channel you invited your bot to.
 1. Send your *omoitsuki* to your slack channel according to the format below.
 > *omoitsukibot* will post your *omoitsuki* to your GitHub repository as an Issue.
 
@@ -31,10 +34,10 @@ It also tracks slack thread comments to *omoitsuki* post, and add comments to th
 
 2. Make comments to *omoitsuki*. There are two ways.
   - post `#[Issue No.][your comment]`
-  - create a thread to and make your comment there
+  - create a thread to a posted *omoistuki* and make your comment there
 > *omoitsukibot* will post your comment to the corresponding GitHub Issue.
 
-## Installation
+## <a name="Deploy"> Installation & Deploy(local)
 ### 1. Download
     $ git clone https://github.com/attache-case/omoitsukibot
 ### <a name="CreateYourSlackBot">2. Create your slack bot
