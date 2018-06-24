@@ -31,7 +31,7 @@ Now, you can stock your *omoitsuki* by posting messages to the Slack channel you
 
 ![omoitsuki format](pics/omoitsuki_format.png)
 
-
+(This feature is still under delevlopment)
 2. Make comments to *omoitsuki*. There are two ways.
   - post `#[Issue No.][your comment]`
   - create a thread to a posted *omoistuki* and make your comment there
